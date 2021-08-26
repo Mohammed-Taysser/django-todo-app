@@ -1,0 +1,39 @@
+{% extends '../base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+  <h3 class="my-3">to do app</h3>
+  <form method="post" class="mt-5" enctype="multipart/form-data">{% csrf_token %}
+
+    <div class="form-group">
+      <label for="title">title</label>
+      <input type="text" class="form-control" id="title" placeholder="what are you think today !" name="title" value="{{form.title.value}}">
+    </div>
+
+    <div class="form-group">
+      <label for="desc">{% trans 'description' %}</label>
+      <textarea class="form-control" id="desc" rows="3" name='{% trans 'description' %}'>{{form.description.value}}</textarea>
+    </div>
+
+    <div class="form-group">
+      <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" id="customSwitch1" {% if form.is_complete.value %}checked{% endif %} name="is_complete">
+        <label class="custom-control-label" for="customSwitch1">{% trans 'complete' %}</label>
+      </div>
+    </div>
+
+    <div class="form-group text-center">
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="customFile" accept="image/jpeg,png,jpg" name='image'>
+        <label class="custom-file-label" for="customFile">{% trans 'change image' %}</label>
+      </div>
+      <img src="{{form.image.value.url}}" alt="todo image" class="img-fluid my-3">
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">{% trans 'save' %}</button>
+
+  </form>
+
+{% endblock content %}

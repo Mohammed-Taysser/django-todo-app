@@ -1,0 +1,30 @@
+{% extends '../base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+  <h3 class="my-3">{% trans 'todo application' %}</h3>
+
+  <form method="post" class="mt-5" enctype="multipart/form-data">{% csrf_token %}
+
+    <div class="form-group">
+      <label for="title">title</label>
+      <input type="text" class="form-control" id="title" placeholder="{% trans 'what are you think today !' %}" name="{% trans 'title' %}">
+    </div>
+    <div class="form-group">
+      <label for="desc">{% trans 'description' %}</label>
+      <textarea class="form-control" id="desc" rows="3" name='{% trans 'description' %}'></textarea>
+    </div>
+    <div class="form-group">
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="customFile" accept="image/jpeg,png,jpg" name="image">
+        <label class="custom-file-label" for="customFile">{% trans 'Choose images' %}</label>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">{% trans 'save' %}</button>
+
+  </form>
+
+{% endblock content %}
